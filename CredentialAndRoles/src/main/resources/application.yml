@@ -1,0 +1,30 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: CredentialAndRoles
+
+  
+
+  datasource:
+    name: credential_roles
+    url: jdbc:mysql://localhost:3306/credential_roles
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8084/eureka/
+    register-with-eureka: true
+    fetch-registry: true
