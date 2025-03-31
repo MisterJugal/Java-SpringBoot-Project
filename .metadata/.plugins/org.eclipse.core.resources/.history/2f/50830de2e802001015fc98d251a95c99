@@ -1,0 +1,75 @@
+package com.streamAPI;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamFeatures {
+
+	public static void main(String[] args) {
+
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6,8,6,7,9,45,658,2,58,74,552,55,5);
+		List<String> listString=Arrays.asList("apple", "banana", "watermelon", "kiwi");
+		List<Employee> employees=Arrays.asList( 
+				new Employee("John", 50000),
+			    new Employee("Jane", 75000),
+			    new Employee("Doe", 60000));
+		
+		StreamFeatures.findEvenNumbers(list);
+		StreamFeatures.greaterThen10(list);
+		StreamFeatures.upperCase(listString);
+		StreamFeatures.findLongest(listString);
+		StreamFeatures.sortEmployees(employees);
+	}
+
+	
+	
+	private static void findEvenNumbers(List<Integer> list) {
+		System.out.println(list.stream().filter(e -> e % 2 == 0).collect(Collectors.toList()));
+	}
+	
+	private static void greaterThen10(List<Integer> list) {
+		
+		System.out.println(list.stream().filter(p->p>10).collect(Collectors.toList()));
+
+	}
+	
+	
+	private static void upperCase(List<String> listString)
+	{
+		System.out.println(listString.stream().map(j->j.toUpperCase()).collect(Collectors.toList()));
+	}
+	
+	private static void findLongest(List<String> listString)
+	{
+		System.out.println(listString.stream().max(Comparator.comparingInt(String::length)).get());
+	}
+	
+	
+	private static void sortEmployees(List<Employee> employees)
+	{
+		System.out.println(employees.stream().sorted(Comparator.comparingInt(e->e.salary)));
+	
+	
+	
+	
+	
+	
+}
+	
+}
+
+class Employee
+{
+	String name;
+	int salary;
+	public Employee(String name, int salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	
+	
+	
+}

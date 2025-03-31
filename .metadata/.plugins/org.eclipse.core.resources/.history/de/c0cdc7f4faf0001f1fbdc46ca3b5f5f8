@@ -1,0 +1,26 @@
+package testPackage;
+
+interface Parent
+{
+	int number=10;
+	default void fromParent()
+	{
+		System.out.println("calling from parent...");
+	}
+}
+
+public class StaticMethods implements Parent {
+	
+	public void fromParent()
+	{
+		Parent.super.fromParent();
+		System.out.println("calling from child..."+ Parent.number);
+		Parent.number=34;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new StaticMethods().fromParent();
+	}
+
+}

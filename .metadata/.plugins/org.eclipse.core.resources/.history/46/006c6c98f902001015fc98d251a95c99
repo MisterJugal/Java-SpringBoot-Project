@@ -1,0 +1,55 @@
+package com.streamAPI;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class StreamFeatures2 {
+
+	public static void main(String[] args) throws Exception {
+
+		List<String> list = Arrays.asList("Apple", "Banana", "Avocado", "Cherry");
+		StreamFeatures2.findFirstString(list, 'A');
+		StreamFeatures2.lengthGreaterthen5(list);
+		StreamFeatures2.groupStringsByLength(list);
+
+	}
+
+	// case insensitive
+
+	private static void findFirstString(List<String> list, Character prefix) {
+
+		System.out.println(list.stream().filter(e -> e.toLowerCase().startsWith(prefix.toString().toLowerCase()))
+				.collect(Collectors.toList()).getFirst());
+		System.out.println(list);
+	}
+
+
+	private static void lengthGreaterthen5(List<String> list) {
+		System.out.println(list.stream().filter(e->e.length()>5).collect(Collectors.toList()).size());
+	}
+
+	private static void findDistinct(List<String> list) {
+		System.out.println(list.stream().distinct().collect(Collectors.toList()));
+	}
+	
+	private static void groupStringsByLength(List<String> list)
+	{
+		Map<Integer, List<String>> group=new HashMap<>();
+		list.stream().forEach(e->group.computeIfAbsent(e.length(), k->new ArrayList<>()).add(e));	
+		
+		System.out.println(group);
+	}
+	
+	private static void sumOfSquaresOfEvenNumbers(List<Integer> list) {
+		
+		System.out.println(list.stream().filter(e->e%2==0).map(e->e*e).collect(Collectors.toList()));
+		
+		
+	}
+	
+
+}

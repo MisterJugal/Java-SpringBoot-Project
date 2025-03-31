@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 250px;
+            padding: 20px;
+            margin: 15px auto;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Button colors */
+        .btn-get-student { background-color: #3498db; }   /* Blue */
+        .btn-get-all { background-color: #2ecc71; }       /* Green */
+        .btn-add-student { background-color: #e74c3c; }   /* Red */
+        .btn-update-student { background-color: #f39c12; }/* Orange */
+        .btn-delete-student { background-color: #9b59b6; }/* Purple */
+        .btn-delete-all { background-color: #34495e; }    /* Dark Blue */
+
+        /* Hover effect */
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Management</h1>
+        
+        <!-- Get a Student -->
+        <button class="btn btn-get-student" onclick="window.location.href='StudentIdPage.html?action=get'">
+            Get a Student
+        </button>
+        
+        <!-- Get All Students -->
+        <button class="btn btn-get-all" onclick="window.location.href='AllStudentDetails.html'">
+            Get All Student
+        </button>
+        
+        <!-- Add a Student -->
+        <button class="btn btn-add-student" onclick="window.location.href='RegisterStudent.html'">
+            Add a Student
+        </button>
+        
+        <!-- Update a Student -->
+        <button class="btn btn-update-student" onclick="window.location.href='StudentIdPage.html?action=update'">
+            Update a Student
+        </button>
+        
+        <!-- Delete a Student -->
+        <button class="btn btn-delete-student" onclick="window.location.href='StudentIdPage.html?action=delete'">
+            Delete a Student
+        </button>
+        
+        <!-- Delete All Students -->
+        <button class="btn btn-delete-all" onclick="window.location.href='DeleteAllStudents.html'">
+            Delete All Students
+        </button>
+    </div>
+    
+</body>
+</html>

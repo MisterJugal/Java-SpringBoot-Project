@@ -1,0 +1,23 @@
+package com.streamAPI;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamFeatures2 {
+
+	public static void main(String[] args) {
+		
+		
+		List<String> list=Arrays.asList("apple", "banana", "avocado", "cherry");
+		StreamFeatures2.findFirstString(list, 'a');
+
+	}
+	
+	
+	private static void findFirstString(List<String> list, Character prefix) {
+		
+		System.out.println(list.stream().filter(e->e.startsWith(prefix.toString())).collect(Collectors.toList()).getFirst());
+	}
+
+}
