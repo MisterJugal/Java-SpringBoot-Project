@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 20px;
+        }
+        .container {
+            max-width: 50%;
+            width: 100%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .course-section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .course-section h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Update Student Details</h1>
+
+    <div class="form-group">
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName" name="studentName" placeholder="Enter student name">
+    </div>
+
+    <div class="form-group">
+        <label for="studentLevel">Student Level</label>
+        <input type="number" id="studentLevel" name="studentLevel" placeholder="Enter student level">
+    </div>
+
+    <!-- Courses will be dynamically populated here -->
+    <div id="coursesContainer"></div>
+
+    <h2>School Details</h2>
+
+    <div class="form-group">
+        <label for="schoolName">School Name</label>
+        <input type="text" id="schoolName" name="schoolName" placeholder="Enter school name">
+    </div>
+
+    <div class="form-group">
+        <label for="schoolAddress">School Address</label>
+        <input type="text" id="schoolAddress" name="schoolAddress" placeholder="Enter school address">
+    </div>
+
+    <div class="form-group">
+        <label for="schoolAge">School Age</label>
+        <input type="text" id="schoolAge" name="schoolAge" placeholder="Enter school age">
+    </div>
+
+    <h2>Home Details</h2>
+
+    <div class="form-group">
+        <label for="homeAddress">Home Address</label>
+        <input type="text" id="homeAddress" name="homeAddress" placeholder="Enter home address">
+    </div>
+
+    <div class="form-group">
+        <label for="homeDistance">Home Distance</label>
+        <input type="text" id="homeDistance" name="homeDistance" placeholder="Enter home distance">
+    </div>
+
+    <button onclick="updateStudent()">Update Student</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const studentData = JSON.parse(localStorage.getItem('studentData'));
+
+        // Populate student data
+        document.getElementById('studentName').value = studentData.studentName;
+        document.getElementById('studentLevel').value = studentData.studentLevel;
+
+        // Populate school data
+        document.getElementById('schoolName').value = studentData.school.schoolName;
+        document.getElementById('schoolAddress').value = studentData.school.schoolAddress;
+        document.getElementById('schoolAge').value = studentData.school.schoolAge;
+
+        // Populate home data
+        document.getElementById('homeAddress').value = studentData.home.homeAddress;
+        document.getElementById('homeDistance').value = studentData.home.homeDistance;
+
+        // Populate courses
+        const coursesContainer = document.getElementById('coursesContainer');
+        studentData.course.forEach((course, index) => {
+            const courseSection = document.createElement('div');
+            courseSection.classList.add('course-section');
+
+            courseSection.innerHTML = `
+                <h3>Course ${index + 1}</h3>
+                <div class="form-group">
+                    <label for="courseName${index}">Course Name</label>
+                    <input type="text" id="courseName${index}" name="courseName${index}" value="${course.courseName}">
+                </div>
+                <div class="form-group">
+                    <label for="courseDuration${index}">Course Duration</label>
+                    <input type="text" id="courseDuration${index}" name="courseDuration${index}" value="${course.courseDuration}">
+                </div>
+            `;
+
+            coursesContainer.appendChild(courseSection);
+        });
+    });
+
+    function updateStudent() {
+    // Retrieve student ID from localStorage
+    const studentData = JSON.parse(localStorage.getItem('studentData'));
+    const studentId = studentData.studentId; // Make sure 'studentId' is stored properly
+    console.log(localStorage.getItem('studentData'));
+    if (!studentId) {
+        alert('Student ID is missing.');
+        return;
+    }
+
+    // Collect all the form data and create the updatedData object
+    const updatedData = {
+        studentName: document.getElementById('studentName').value,
+        studentLevel: document.getElementById('studentLevel').value,
+        course: [...document.querySelectorAll('.course-section')].map((section, index) => ({
+            courseName: document.getElementById(`courseName${index}`).value,
+            courseDuration: document.getElementById(`courseDuration${index}`).value
+        })),
+        school: {
+            schoolName: document.getElementById('schoolName').value,
+            schoolAddress: document.getElementById('schoolAddress').value,
+            schoolAge: document.getElementById('schoolAge').value,
+        },
+        home: {
+            homeAddress: document.getElementById('homeAddress').value,
+            homeDistance: document.getElementById('homeDistance').value,
+        }
+    };
+
+    // Send PUT request to update the student details
+    fetch(`/student/updateStudent/${studentId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Student updated successfully!');
+        } else {
+            return response.text().then(text => { throw new Error(text); });
+        }
+    })
+    .catch(error => {
+        console.error('Error updating student:', error);
+        alert(`Error: ${error.message}`);
+    });
+}
+
+</script>
+
+</body>
+</html>

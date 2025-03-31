@@ -1,0 +1,28 @@
+package testPackage;
+
+class parent {
+	void fromParent() {
+		System.out.println("From parent");
+	}
+}
+
+class child extends parent {
+	void fromChild() {
+		System.out.println("From child");
+	}
+
+}
+
+public class PerentObj {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		parent parentObj = new parent();
+
+		parentObj.fromParent();
+		child obj = (child) new parent(); // Runtime ClassCastException
+		obj.fromChild();
+
+	}
+
+}
