@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;com.SchoolDetails.SchoolServiceImpl&apos; to &apos;com.SchoolDetails.ServiceImpl&apos;&#x0D;&#x0A;- Original project: &apos;SchoolDetails&apos;&#x0D;&#x0A;- Original element: &apos;SchoolDetails/src/main/java/com.SchoolDetails.SchoolServiceImpl&apos;&#x0D;&#x0A;- Renamed element: &apos;SchoolDetails/src/main/java/com.SchoolDetails.ServiceImpl&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.SchoolDetails.SchoolServiceImpl&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.SchoolDetails.SchoolServiceImpl" name="com.SchoolDetails.ServiceImpl" qualified="false" references="true" stamp="1740733808837" textual="true" version="1.0"/>
-</session>
