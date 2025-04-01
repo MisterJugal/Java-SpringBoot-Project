@@ -1,6 +1,5 @@
 package com.credentialRoles.Security;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.credentialRoles.Repo.MyUserRepository;
 import com.credentialRoles.entity.MyUser;
 
-import jakarta.ws.rs.NotFoundException;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
@@ -22,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		MyUser fetchedUser= myUserRepository.findById(username).orElseThrow(()-> new NotFoundException(username+" : User not found"));
+		MyUser fetchedUser= myUserRepository.findById(username).orElseThrow(()-> new UsernameNotFoundException("User not found"));
 		
 		
 		return User.builder()

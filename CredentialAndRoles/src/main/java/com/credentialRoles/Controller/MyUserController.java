@@ -13,6 +13,8 @@ import com.credentialRoles.Service.MyUserService;
 import com.credentialRoles.entity.MyUser;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -24,7 +26,7 @@ public class MyUserController {
 
     @GetMapping("/allUsers")
     public ResponseEntity<List<MyUser>> getAllUsers()
-    {
+    {  System.out.println("Going to service impl to get user");
         return new ResponseEntity<>( myUserService.getAllUsers(),HttpStatus.OK );
     }
 
@@ -32,9 +34,16 @@ public class MyUserController {
     @PostMapping("/addUser")
     public ResponseEntity<MyUser> addUser(@RequestBody MyUser myUser) {
         
-        
+        System.out.println("Going to service impl to add user");
         return new ResponseEntity<>(myUserService.addUser(myUser),HttpStatus.CREATED);
     }
+
+    @GetMapping("/loginSuccess")
+    public String getMethodName() {
+        return new String("Login success");
+    }
+    
+    
     
 
 }
