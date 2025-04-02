@@ -50,14 +50,15 @@ API Gateway
 
 
 Project Structure
-CredentialAndRoles → Manages authentication and roles using Spring Security & JWT.
 
-StudentAndCourses → Handles student and course-related operations.
+	CredentialAndRoles → Manages authentication and roles using Spring Security & JWT.
 
-SchoolDetails → Manages school-related data.
+	StudentAndCourses → Handles student and course-related operations.
 
-HomeService → Handles student home-related data.
+	SchoolDetails → Manages school-related data.
 
-ServiceRegistry → Eureka Server for service discovery.
+	HomeService → Handles student home-related data.
 
-StudentGateway → API Gateway for managing requests.
+	ServiceRegistry → Eureka Server for service discovery.
+
+	StudentGateway → API Gateway for managing requests.
