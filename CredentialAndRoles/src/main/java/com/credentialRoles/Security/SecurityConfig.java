@@ -3,6 +3,7 @@ package com.credentialRoles.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -45,7 +46,8 @@ public class SecurityConfig {
 		http
 				.authorizeHttpRequests(e -> e
 						.requestMatchers("/auth/**").permitAll()
-						.requestMatchers("/admin/**").authenticated())
+						.requestMatchers(HttpMethod.GET,"/admin/**").permitAll()
+						.requestMatchers("/admin/**").hasRole("ADMIN"))
 				.sessionManagement(e -> e.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.authenticationProvider(authenticationProvider())
