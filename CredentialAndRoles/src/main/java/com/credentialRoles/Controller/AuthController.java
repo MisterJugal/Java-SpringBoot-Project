@@ -36,19 +36,19 @@ public class AuthController {
     @PostMapping("/login")
     ResponseEntity<JWTAuthResponse> login(@RequestBody JWTAuthRequest request) {
 
-        System.out.println("calling UsernamePasswordAuthenticationToken");
+       
         Authentication auth = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
 
-        System.out.println("Authenticating");
+       
         authenticationManager.authenticate(auth);
 
-        System.out.println("loadUserByUsername");
+       
         UserDetails user = userDetailsService.loadUserByUsername(request.getUsername());
 
-        System.out.println("Generating token");
+       
         String token = jwtTokenHelper.generateToken(user.getUsername());
 
-        System.out.println("Setting token");
+      
         jwtAuthResponse.setToken(token);
 
         
