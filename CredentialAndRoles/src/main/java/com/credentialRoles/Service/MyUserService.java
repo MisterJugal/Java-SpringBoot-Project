@@ -9,4 +9,5 @@ public interface MyUserService {
 
    List<MyUser> getAllUsers();
    MyUser addUser(MyUser myUser);
+   MyUser loadUserByUsername(String username);
 }

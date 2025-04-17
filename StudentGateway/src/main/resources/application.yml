@@ -1,7 +1,7 @@
 
 
 server:
-  port: 8081
+  port: 8080
 
   max-http-request-header-size: 16KB
 eureka:
@@ -32,3 +32,8 @@ spring:
           uri: lb://SCHOOL-SERVICE  # 'lb://' means load balanced, pointing to Eureka service name
           predicates:
             - Path=/school/**
+
+        - id: CredentialAndRoles   # Route ID for the student service
+          uri: lb://CredentialAndRoles  # 'lb://' means load balanced, pointing to Eureka service name
+          predicates:
+            - Path=/auth/**,/admin/**

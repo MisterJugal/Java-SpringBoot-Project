@@ -1,17 +1,25 @@
-package com.FirstProject.ServiceImpl;
+package com.StudentAndCourses.ServiceImpl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.FirstProject.Entity.School;
-import com.FirstProject.Entity.Student;
-import com.FirstProject.ExternalServices.HomeService;
-import com.FirstProject.Repositories.StudentRepo;
-import com.FirstProject.Service.StudentService;
 
-@Component
+import com.StudentAndCourses.Entity.School;
+import com.StudentAndCourses.Entity.Student;
+import com.StudentAndCourses.ExternalServices.HomeService;
+import com.StudentAndCourses.Repositories.StudentRepo;
+import com.StudentAndCourses.Service.StudentService;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Service
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired
@@ -24,18 +32,34 @@ public class StudentServiceImpl implements StudentService {
 	private RestTemplate restTemplate;
 
 	@Override
-	public List<Student> getAllStudents() {
+	public List<Student> getAllStudents(HttpServletRequest request) {
 
 		List<Student> students=studentRepo.findAll();
 
+		String token=request.getHeader("Authorization");
+
+
+		HttpHeaders headers = new HttpHeaders();
+
+		headers.set("Authorization", token);
+
+		HttpEntity<?> entity=new HttpEntity<>(headers);
+
+
+
 		for(Student s:students)
 		{
-			School school=restTemplate.getForEntity("http://SCHOOL-SERVICE/school/getSchool/"+s.getSchoolId(), School.class).getBody();
-			
+        // Authenticated REST call with token
+        ResponseEntity<School> schoolResponse = restTemplate.exchange(
+            "http://SCHOOL-SERVICE/school/getSchool/" + s.getSchoolId(),
+            HttpMethod.GET,
+            entity,
+            School.class
+        );
 
-			s.setHome(homeService.getHomeById(s.getHomeId()).getBody());
-			s.setSchool(school);
-		}	
+        s.setSchool(schoolResponse.getBody());
+        s.setHome(homeService.getHomeById(s.getHomeId()).getBody()); 
+    }	
 
 		return students;
 	}
@@ -43,7 +67,7 @@ public class StudentServiceImpl implements StudentService {
 	
 
 	@Override
-	public Student getStudentById(int studentId) {
+	public Student getStudentById(int studentId, HttpServletRequest request) {
 
 		List<Student> list = studentRepo.findAll();
 

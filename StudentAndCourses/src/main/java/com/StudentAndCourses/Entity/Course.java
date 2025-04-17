@@ -1,4 +1,4 @@
-package com.FirstProject.Entity;
+package com.StudentAndCourses.Entity;
 
 import java.util.List;
 

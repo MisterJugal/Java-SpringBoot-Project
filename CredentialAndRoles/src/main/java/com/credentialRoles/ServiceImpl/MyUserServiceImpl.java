@@ -1,6 +1,7 @@
 package com.credentialRoles.ServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +39,18 @@ public class MyUserServiceImpl implements MyUserService{
         System.out.println("saving user");
 
         return myUserRepository.save(myUser);
+    }
+
+
+    
+
+    @Override
+    public MyUser loadUserByUsername(String username) {
+        
+        Optional<MyUser> op=myUserRepository.findByUsername(username);
+
+        return op.get();
+
     }
 
 }

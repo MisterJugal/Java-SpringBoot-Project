@@ -1,20 +1,21 @@
-package com.credentialRoles.JWTAuthentication;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-
-import org.springframework.stereotype.Component;
+package com.SchoolDetails.Authentication;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+    
 @Component
 public class JWTTokenHelper {
 
-    private final String SECRET_KEY = "wJx8Tz9K2vL1Nc5DgQhZrXeF0mYnAsBi"; // Use environment variables in production
+    private final String SECRET_KEY = "wJx8Tz9K2vL1Nc5DgQhZrXeF0mYnAsBi"; // Use environment variables in
+                                                                               // production
     private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
     // Generate JWT Token
@@ -55,4 +56,5 @@ public class JWTTokenHelper {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+
 }

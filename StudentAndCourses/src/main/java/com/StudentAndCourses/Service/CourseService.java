@@ -1,9 +1,12 @@
-package com.FirstProject.Service;
+package com.StudentAndCourses.Service;
 
 import java.util.List;
 
-import com.FirstProject.Entity.Course;
+import org.springframework.stereotype.Component;
 
+import com.StudentAndCourses.Entity.Course;
+
+@Component
 public interface CourseService {
 
 	public List<Course> getAllCourses();

@@ -1,15 +1,15 @@
-package com.FirstProject.ServiceImpl;
+package com.StudentAndCourses.ServiceImpl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.FirstProject.Entity.Course;
-import com.FirstProject.Repositories.CourseRepo;
-import com.FirstProject.Service.CourseService;
+import com.StudentAndCourses.Entity.Course;
+import com.StudentAndCourses.Repositories.CourseRepo;
+import com.StudentAndCourses.Service.CourseService;
 
-@Component
+@Service
 public class CourseServiceImpl implements CourseService{
 	
 	@Autowired

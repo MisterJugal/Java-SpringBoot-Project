@@ -1,4 +1,4 @@
-package com.FirstProject.ExternalServices;
+package com.StudentAndCourses.ExternalServices;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.FirstProject.Entity.Home;
+import com.StudentAndCourses.Entity.Home;
 
 @FeignClient(name = "HOME-SERVICE/home")
 public interface HomeService {

@@ -1,9 +1,9 @@
-package com.FirstProject.Repositories;
+package com.StudentAndCourses.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.FirstProject.Entity.Student;
+import com.StudentAndCourses.Entity.Student;
 
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Integer> {

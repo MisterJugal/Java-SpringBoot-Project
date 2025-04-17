@@ -1,4 +1,4 @@
-package com.FirstProject.Controller;
+package com.StudentAndCourses.Controller;
 
 import java.util.List;
 
@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FirstProject.Entity.Course;
-import com.FirstProject.Service.CourseService;
+import com.StudentAndCourses.Entity.Course;
+import com.StudentAndCourses.Service.CourseService;
 
 @RestController
 @RequestMapping("/course")
-
 public class CourseController {
 	
 	@Autowired

@@ -1,4 +1,4 @@
-package com.FirstProject.Controller;
+package com.StudentAndCourses.Controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FirstProject.Entity.Student;
-import com.FirstProject.Service.StudentService;
+import com.StudentAndCourses.Entity.Student;
+import com.StudentAndCourses.Service.StudentService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -26,8 +28,8 @@ public class StudentController {
 
 	@SuppressWarnings("null")
 	@GetMapping("/adminView")
-	public ResponseEntity<List<Student>> adminViewOfStudents() {
-		List<Student> students = studentService.getAllStudents();
+	public ResponseEntity<List<Student>> adminViewOfStudents(HttpServletRequest request) {
+		List<Student> students = studentService.getAllStudents(request);
 
 		if (students.isEmpty())
 
@@ -38,8 +40,8 @@ public class StudentController {
 
 	@SuppressWarnings("null")
 	@GetMapping("/students")
-	public ResponseEntity<List<Student>> getAllStudents() {
-		List<Student> students = studentService.getAllStudents();
+	public ResponseEntity<List<Student>> getAllStudents(HttpServletRequest request) {
+		List<Student> students = studentService.getAllStudents(request);
 
 		if (students.isEmpty())
 
@@ -50,8 +52,8 @@ public class StudentController {
 
 	@SuppressWarnings("null")
 	@GetMapping("/student/{studentId}")
-	public ResponseEntity<Student> getStudentByID(@PathVariable int studentId) {
-		Student student = studentService.getStudentById(studentId);
+	public ResponseEntity<Student> getStudentByID(@PathVariable int studentId, HttpServletRequest request) {
+		Student student = studentService.getStudentById(studentId,request);
 
 		if (student.equals(null))
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

@@ -1,4 +1,4 @@
-package com.FirstProject;
+package com.StudentAndCourses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,10 +13,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.FirstProject.Repositories")
+@EnableJpaRepositories(basePackages = "com.StudentAndCourses.Repositories")
 @EnableDiscoveryClient
 @EnableFeignClients
-public class FirstProjectApplication {
+public class StudentAndCoursesApplication {
 	
 
 	@Autowired
@@ -30,10 +30,10 @@ public class FirstProjectApplication {
 	}
 
 	public static void main(String[] args) {
-		 ConfigurableApplicationContext context =SpringApplication.run(FirstProjectApplication.class, args);
+		 ConfigurableApplicationContext context =SpringApplication.run(StudentAndCoursesApplication.class, args);
 
 		
-		FirstProjectApplication app = context.getBean(FirstProjectApplication.class);
+		 StudentAndCoursesApplication app = context.getBean(StudentAndCoursesApplication.class);
         app.getEnvProperty();
 		
 	
